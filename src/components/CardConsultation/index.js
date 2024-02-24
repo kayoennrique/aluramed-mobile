@@ -8,7 +8,7 @@ export function CardConsultation({ name, photo, time, typeQuery, icon }) {
     <View style={styles.container}>
       <View style={styles.peopleArea}>
         <Image source={photo} style={styles.photo} />
-        <View style={styles.informacoes}>
+        <View style={styles.information}>
           <Text style={styles.name}>{name}</Text>
           <View style={styles.consultationArea}>
             <Icon name={icon} size={16} color="#A3A3A3" />
@@ -19,17 +19,17 @@ export function CardConsultation({ name, photo, time, typeQuery, icon }) {
       <View style={styles.informationSchedule}>
         <Text style={styles.text}>{time}</Text>
         <View style={styles.buttonsArea}>
-          {icon === "video" ? 
-          <>
-            <TouchableOpacity style={[styles.button, { backgroundColor: '#FFB050' }]}>
-              <Text style={styles.buttonText}>Ligar por vídeo</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Ligar por áudio</Text>
-            </TouchableOpacity>
-          </> :
+          {icon === "video" ?
+            <>
+              <TouchableOpacity style={[styles.button, { backgroundColor: '#FFB050' }]}>
+                <Text style={styles.buttonText}>Ligar por vídeo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Ligar por áudio</Text>
+              </TouchableOpacity>
+            </> :
             <TouchableOpacity style={styles.buttonLocation}>
-              <Text style={[styles.buttonText, {color: '#FFF'}]}>Ver endereço</Text>
+              <Text style={[styles.buttonText, { color: '#FFF' }]}>Ver endereço</Text>
             </TouchableOpacity>
           }
         </View>
