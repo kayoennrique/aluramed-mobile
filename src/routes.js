@@ -7,14 +7,16 @@ const Tab = createNativeStackNavigator();
 import Onboarding from './screens/Onboarding';
 import Main from './screens/Main';
 import Details from './screens/Details';
+import SplashScreen from './screens/SplashScreen';
 
 export default function Routes() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }}/>
-        <Tab.Screen name="Principal" component={Main} options={{ headerShown: false }}/>
-        <Tab.Screen name="Detalhes" component={Details}/>
+        <Tab.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+        <Tab.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
+        <Tab.Screen name="Principal" component={Main} options={{ headerShown: false }} />
+        <Tab.Screen name="Detalhes" component={Details} />
       </Tab.Navigator>
     </NavigationContainer>
   );
