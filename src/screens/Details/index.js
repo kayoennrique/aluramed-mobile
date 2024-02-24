@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { BackgroundScreen } from '../../components/BackgroundScreen';
 import { UserInformation } from '../../components/UserInformation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import map from '../../assets/mapa.png';
 import styles from './styles';
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, withRepeat } from 'react-native-reanimated';
 
 export default function Details(props) {
   const datta = props.route.params;
-  const position = useSharedValue(0);
+  const rotation = useSharedValue(0);
+  const angle = -30;
+  const [alreadyAnimated, setAlreadyAnimated] = useState(false);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          translateX: withSpring(position.value * 255)
+          rotate: `${rotation.value}deg`
         }
       ]
     }
   });
 
-  function changeBlockPosition() {
-    position.value = Math.random() * 255;
+  function doRotation() {
+    rotation.value = withRepeat(withTiming(angle, { duration: 120 }), 6, true)
+
+    setTimeout(() => {
+      setAlreadyAnimated(true);
+    }, 1000)
   }
 
   return (
     <BackgroundScreen>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <Animated.View style={[{ backgroundColor: 'green', width: 50, height: 50 }, animatedStyle]} />
-        <Button title='Mova' onPress={changeBlockPosition} />
         <UserInformation
           name={datta.name}
           details="Cliente desde 2018"
@@ -58,13 +62,17 @@ export default function Details(props) {
         <Text>{datta.address}</Text>
         <TouchableOpacity
           style={styles.button}
+          onPress={doRotation}
         >
           <Text style={styles.buttonText}>Notificar consulta</Text>
-          <Icon
-            name={'notifications-none'}
-            size={20}
-            color="#FFF"
-          />
+          <Animated.View style={[styles.icon, animatedStyle]}>
+            <Icon
+              name={alreadyAnimated ? 'notifications' : 'notifications-none'}
+              size={20}
+              color="#FFF"
+            />
+
+          </Animated.View>
         </TouchableOpacity>
       </ScrollView>
     </BackgroundScreen>
