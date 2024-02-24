@@ -5,6 +5,7 @@ import { BackgroundScreen } from '../../components/BackgroundScreen';
 import { Form } from '../../components/Form';
 import items from './cards';
 import styles from './styles';
+import { Carousel } from '../../components/Carousel';
 
 export default function Onboarding({ navigation }) {
   const [makeLogin, setMakeLogin] = useState(false);
@@ -30,19 +31,8 @@ export default function Onboarding({ navigation }) {
 
         <View style={styles.carrosselArea}>
           {!makeLogin && (
-            <FlatList
-              data={items}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) => (
-                <Image
-                  source={item.image}
-                  style={{ height: '100%', width: 150 }}
-                  resizeMode="contain"
-                />
-              )}
-            />)}
+            <Carousel data={items} />
+          )}
         </View>
         <Image
           source={require('../../assets/medica.png')}
