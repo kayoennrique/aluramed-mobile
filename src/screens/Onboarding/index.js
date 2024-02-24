@@ -1,21 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StatusBar, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
 import WavyBackground from '../../components/WavyBackground';
 import { BackgroundScreen } from '../../components/BackgroundScreen';
 import { Form } from '../../components/Form';
+import { Carousel } from '../../components/Carousel';
 import items from './cards';
 import styles from './styles';
-import { Carousel } from '../../components/Carousel';
 
 export default function Onboarding({ navigation }) {
   const [makeLogin, setMakeLogin] = useState(false);
   const [height, setHeight] = useState(250);
+
+  const animationCustom = {
+    duration: 1500,
+    create: {
+      type: LayoutAnimation.Types.spring,
+      property: LayoutAnimation.Properties.scaleXY,
+      springDamping: 0.7
+    }
+  }
+
+  LayoutAnimation.configureNext(animationCustom);
 
   function advance() {
     if (makeLogin) {
       navigation.navigate('Principal');
     } else {
       setHeight(400);
+      LayoutAnimation.linear();
       setMakeLogin(true);
     }
   }
