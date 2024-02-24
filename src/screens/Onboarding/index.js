@@ -31,7 +31,7 @@ export default function Onboarding({ navigation }) {
 
         <View style={styles.carrosselArea}>
           {!makeLogin && (
-            <Carousel data={items} />
+            <Carousel data={items} weatherAnimation={2000} />
           )}
         </View>
         <Image
@@ -42,8 +42,8 @@ export default function Onboarding({ navigation }) {
           <View style={styles.infoArea}>
             {makeLogin ?
               <Form
-                titulo="Olá! Acesse sua conta"
-                texto="Entre com suas informações. Senão tiver uma conta ainda crie uma agora"
+                title="Olá! Acesse sua conta"
+                text="Entre com suas informações. Senão tiver uma conta ainda crie uma agora"
               />
               :
               <View>
